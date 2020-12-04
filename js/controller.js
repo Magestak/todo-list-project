@@ -2,14 +2,13 @@
 	'use strict';
 
 	/**
-	 * Takes a model and view and acts as the controller between them
-	 *
+	 * Le controller établit le lien entre {@link Model} et {@Link View}.
 	 * @constructor
-	 * @param {object} model The model instance
-	 * @param {object} view The view instance
+	 * @param {object} (model) L'instance {@Link Model}.
+	 * @param {object} (view) L'instance {@Link View}.
 	 */
 	function Controller(model, view) {
-		var self = this;
+		let self = this;
 		self.model = model;
 		self.view = view;
 
@@ -47,39 +46,38 @@
 	}
 
 	/**
-	 * Loads and initialises the view
-	 *
-	 * @param {string} '' | 'active' | 'completed'
+	 * Charge et initialise {@Link View}.
+	 * @param {string} (locationHash) Le hash de la page qui peut
+	 * avoir les valeurs: '' | 'active' | 'completed'.
 	 */
 	Controller.prototype.setView = function (locationHash) {
-		var route = locationHash.split('/')[1];
-		var page = route || '';
+		let route = locationHash.split('/')[1];
+		let page = route || '';
 		this._updateFilterState(page);
 	};
 
 	/**
-	 * An event to fire on load. Will get all items and display them in the
-	 * todo-list
+	 * Affiche toutes les entrées présentes dans la base.
 	 */
 	Controller.prototype.showAll = function () {
-		var self = this;
+		let self = this;
 		self.model.read(function (data) {
 			self.view.render('showEntries', data);
 		});
 	};
 
 	/**
-	 * Renders all active tasks
+	 * Retourne toutes les tâches en cours.
 	 */
 	Controller.prototype.showActive = function () {
-		var self = this;
+		let self = this;
 		self.model.read({ completed: false }, function (data) {
 			self.view.render('showEntries', data);
 		});
 	};
 
 	/**
-	 * Renders all completed tasks
+	 * Retourne toutes les tâches terminées.
 	 */
 	Controller.prototype.showCompleted = function () {
 		var self = this;
@@ -89,11 +87,12 @@
 	};
 
 	/**
-	 * An event to fire whenever you want to add an item. Simply pass in the event
-	 * object and it'll handle the DOM insertion and saving of the new item.
+	 * Un événement à déclencher chaque fois que vous souhaitez ajouter un élément. Il suffit de passer
+	 * l'objet événement et il se chargera de l'insertion dans le DOM et de la sauvegarde du nouvel objet.
+	 * @param {string} (title) Le contenu du to-do.
 	 */
 	Controller.prototype.addItem = function (title) { // Etape 1: correction bug 1 = faute de frappe
-		var self = this;
+		let self = this;
 
 		if (title.trim() === '') {
 			return;
@@ -105,21 +104,24 @@
 		});
 	};
 
-	/*
-	 * Triggers the item editing mode.
+	/**
+	 * Déclenche le mode édition d'un to-do.
+	 * @param {number} (id) L'ID du to-do à éditer.
 	 */
 	Controller.prototype.editItem = function (id) {
-		var self = this;
+		let self = this;
 		self.model.read(id, function (data) {
 			self.view.render('editItem', {id: id, title: data[0].title});
 		});
 	};
 
-	/*
-	 * Finishes the item editing mode successfully.
+	/**
+	 * Enregistre la modification d’un to-do.
+	 * @param {number} (id) L'ID du to-do.
+	 * @param {string} (title) Le contenu du to-do.
 	 */
 	Controller.prototype.editItemSave = function (id, title) {
-		var self = this;
+		let self = this;
 
 		while (title[0] === " ") {
 			title = title.slice(1);
@@ -138,8 +140,9 @@
 		}
 	};
 
-	/*
-	 * Cancels the item editing mode.
+	/**
+	 * Annule la modification d'un to-do.
+	 * @param {number} (id) L'ID du to-do à modifier.
 	 */
 	Controller.prototype.editItemCancel = function (id) {
 		var self = this;
@@ -149,37 +152,29 @@
 	};
 
 	/**
-	 * By giving it an ID it'll find the DOM element matching that ID,
-	 * remove it from the DOM and also remove it from storage.
-	 *
-	 * @param {number} id The ID of the item to remove from the DOM and
-	 * storage
+	 * Supprime un to-do du DOM et de la base.
+	 * @param {number} (id) L'ID du to-do à supprimer.
 	 */
 	Controller.prototype.removeItem = function (id) {
-		var self = this;
-		var items;
+		let self = this;
+		let items;
 		self.model.read(function(data) {
 			items = data;
 		});
 
-		items.forEach(function(item) {
-			if (item.id === id) {
-				console.log("Element with ID: " + id + " has been removed.");
-			}
-		});
-
 		self.model.remove(id, function () {
 			self.view.render('removeItem', id);
+			console.log("Element with ID: " + id + " has been removed.");
 		});
 
 		self._filter();
 	};
 
 	/**
-	 * Will remove all completed items from the DOM and storage.
+	 * Supprime toutes les entrées terminées.
 	 */
 	Controller.prototype.removeCompletedItems = function () {
-		var self = this;
+		let self = this;
 		self.model.read({ completed: true }, function (data) {
 			data.forEach(function (item) {
 				self.removeItem(item.id);
@@ -190,16 +185,13 @@
 	};
 
 	/**
-	 * Give it an ID of a model and a checkbox and it will update the item
-	 * in storage based on the checkbox's state.
-	 *
-	 * @param {number} id The ID of the element to complete or uncomplete
-	 * @param {object} checkbox The checkbox to check the state of complete
-	 *                          or not
-	 * @param {boolean|undefined} silent Prevent re-filtering the todo items
+	 * Termine ou active un to-do dans la base (coche/décoche).
+	 * @param {number} (id) L'ID du to-do
+	 * @param {object} (completed) La checkbox du to-do
+	 * @param {boolean|undefined} (silent) Empêcher le re-filtrage des éléments de tâche.
 	 */
 	Controller.prototype.toggleComplete = function (id, completed, silent) {
-		var self = this;
+		let self = this;
 		self.model.update(id, { completed: completed }, function () {
 			self.view.render('elementComplete', {
 				id: id,
@@ -213,11 +205,11 @@
 	};
 
 	/**
-	 * Will toggle ALL checkboxes' on/off state and completeness of models.
-	 * Just pass in the event object.
+	 * Termine ou active toutes les entrées dans la base (coche/décoche).
+	 * @param {object} (completed) La checkbox du to-do.
 	 */
 	Controller.prototype.toggleAll = function (completed) {
-		var self = this;
+		let self = this;
 		self.model.read({ completed: !completed }, function (data) {
 			data.forEach(function (item) {
 				self.toggleComplete(item.id, completed, true);
@@ -228,11 +220,10 @@
 	};
 
 	/**
-	 * Updates the pieces of the page which change depending on the remaining
-	 * number of todos.
+	 * Met à jour le nombre de to-do actifs restants.
 	 */
 	Controller.prototype._updateCount = function () {
-		var self = this;
+		let self = this;
 		self.model.getCount(function (todos) {
 			self.view.render('updateElementCount', todos.active);
 			self.view.render('clearCompletedButton', {
@@ -246,18 +237,18 @@
 	};
 
 	/**
-	 * Re-filters the todo items, based on the active route.
-	 * @param {boolean|undefined} force  forces a re-painting of todo items.
+	 * Filtre les to-do en fonction de leur statut (All, Active ou Completed).
+	 * @param {boolean|undefined} (force)  Refiltre les todos.
 	 */
 	Controller.prototype._filter = function (force) {
-		var activeRoute = this._activeRoute.charAt(0).toUpperCase() + this._activeRoute.substr(1);
+		let activeRoute = this._activeRoute.charAt(0).toUpperCase() + this._activeRoute.substr(1);
 
-		// Update the elements on the page, which change with each completed todo
+		// Mettre à jour les éléments sur la page qui changent à chaque fois.
 		this._updateCount();
 
-		// If the last active route isn't "All", or we're switching routes, we
-		// re-create the todo item elements, calling:
-		//   this.show[All|Active|Completed]();
+		// Si la dernière route active n'est pas "All", ou si nous changeons de route,nous recréons
+		// les éléments de l'élément to-do, en appelant:
+		// this.show[All|Active|Completed]();
 		if (force || this._lastActiveRoute !== 'All' || this._lastActiveRoute !== activeRoute) {
 			this['show' + activeRoute]();
 		}
@@ -266,11 +257,12 @@
 	};
 
 	/**
-	 * Simply updates the filter nav's selected states
+	 * Met à jour le statut sélectionné de la navigation du filtre.
+	 * @param {string} (currentPage) '' || active || completed La route de la page actuelle.
 	 */
 	Controller.prototype._updateFilterState = function (currentPage) {
-		// Store a reference to the active route, allowing us to re-filter todo
-		// items as they are marked complete or incomplete.
+		// Stockez une référence à la route active, ce qui nous permet de filtrer à nouveau
+		// les éléments de tâche tels qu'ils sont marqués comme complets ou incomplets.
 		this._activeRoute = currentPage;
 
 		if (currentPage === '') {
@@ -282,7 +274,7 @@
 		this.view.render('setFilter', currentPage);
 	};
 
-	// Export to window
+	// Exporte vers Window.
 	window.app = window.app || {};
 	window.app.Controller = Controller;
 })(window);
