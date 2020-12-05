@@ -80,7 +80,7 @@
 	 * Retourne toutes les tâches terminées.
 	 */
 	Controller.prototype.showCompleted = function () {
-		var self = this;
+		let self = this;
 		self.model.read({ completed: true }, function (data) {
 			self.view.render('showEntries', data);
 		});
@@ -145,7 +145,7 @@
 	 * @param {number} (id) L'ID du to-do à modifier.
 	 */
 	Controller.prototype.editItemCancel = function (id) {
-		var self = this;
+		let self = this;
 		self.model.read(id, function (data) {
 			self.view.render('editItemDone', {id: id, title: data[0].title});
 		});
