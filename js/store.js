@@ -3,12 +3,9 @@
 	'use strict';
 
 	/**
-	 * Creates a new client side storage object and will create an empty
-	 * collection if no collection already exists.
-	 *
-	 * @param {string} name The name of our DB we want to use
-	 * @param {function} callback Our fake DB uses callbacks because in
-	 * real life you probably would be making AJAX calls
+	 * Créé une nouvelle base de données dans le LocalStorage du navigateur si elle n’existe pas déjà.
+	 * @param {string} (name) Le nom de la base de données.
+	 * @param {function} (callback) La fonction de rappel.
 	 */
 	function Store(name, callback) {
 		callback = callback || function () {};
@@ -16,7 +13,7 @@
 		this._dbName = name;
 
 		if (!localStorage[name]) {
-			var data = {
+			let data = {
 				todos: []
 			};
 
@@ -27,16 +24,14 @@
 	}
 
 	/**
-	 * Finds items based on a query given as a JS object
-	 *
-	 * @param {object} query The query to match against (i.e. {foo: 'bar'})
-	 * @param {function} callback	 The callback to fire when the query has
-	 * completed running
-	 *
+	 * Récupère une donnée dans la base de données à partir d’une requête (query).
+	 * @param {object} (query) La requête à comparer (c'est-à-dire {foo : 'bar').
+	 * @param {function} (callback)	 La fonction de rappel à déclencher lorsque l' exécution
+	 * de la requête est terminée.
 	 * @example
 	 * db.find({foo: 'bar', hello: 'world'}, function (data) {
-	 *	 // data will return any items that have foo: bar and
-	 *	 // hello: world in their properties
+	 *	 // Données retournera tous les éléments qui ont foo: bar et
+	 *	 // hello: world dans leurs propriétés
 	 * });
 	 */
 	Store.prototype.find = function (query, callback) {
@@ -44,10 +39,10 @@
 			return;
 		}
 
-		var todos = JSON.parse(localStorage[this._dbName]).todos;
+		let todos = JSON.parse(localStorage[this._dbName]).todos;
 
 		callback.call(this, todos.filter(function (todo) {
-			for (var q in query) {
+			for (let q in query) {
 				if (query[q] !== todo[q]) {
 					return false;
 				}
@@ -57,9 +52,8 @@
 	};
 
 	/**
-	 * Will retrieve all data from the collection
-	 *
-	 * @param {function} callback The callback to fire upon retrieving data
+	 * Récupère toutes les données de la base de données.
+	 * @param {function} (callback) La fonction de rappel lors de la récupération des données.
 	 */
 	Store.prototype.findAll = function (callback) {
 		callback = callback || function () {};
@@ -67,12 +61,11 @@
 	};
 
 	/**
-	 * Will save the given data to the DB. If no item exists it will create a new
-	 * item, otherwise it'll simply update an existing item's properties
-	 *
-	 * @param {object} updateData The data to save back into the DB
-	 * @param {function} callback The callback to fire after saving
-	 * @param {number} id An optional param to enter an ID of an item to update
+	 * Enregistre (si elle n’existe pas) ou met à jour (si elle existe) une entrée dans la
+	 base de données.
+	 * @param {object} (updateData) Les données à sauvegarder dans la base de données.
+	 * @param {function} (callback) La fonction de rappel après l'enregistrement.
+	 * @param {number} (id) Un paramètre optionnel correspondant à l'élément à mettre à jour.
 	 */
 	Store.prototype.save = function (updateData, callback, id) {
 		let data = JSON.parse(localStorage[this._dbName]);
@@ -90,11 +83,11 @@
      		newId += charset.charAt(Math.floor(Math.random() * charset.length));
 		}
 
-		// If an ID was actually given, find the item and update each property
+		// Si un ID a été donné, trouve l'élément et met à jour les propriétés.
 		if (id) {
-			for (var i = 0; i < todos.length; i++) {
+			for (let i = 0; i < todos.length; i++) {
 				if (todos[i].id === id) {
-					for (var key in updateData) {
+					for (let key in updateData) {
 						todos[i][key] = updateData[key];
 					}
 					break;
@@ -116,24 +109,24 @@
 	};
 
 	/**
-	 * Will remove an item from the Store based on its ID
-	 *
-	 * @param {number} id The ID of the item you want to remove
-	 * @param {function} callback The callback to fire after saving
+	 * Supprime une entrée de la base en fonction de son identifiant.
+	 * @param {number} (id ) L'ID de l'entrée à supprimer.
+	 * @param {function} (callback) La fonction de rappel après l'enregistrement.
 	 */
 	Store.prototype.remove = function (id, callback) {
-		var data = JSON.parse(localStorage[this._dbName]);
-		var todos = data.todos;
-		var todoId;
-		
-		for (var i = 0; i < todos.length; i++) {
-			if (todos[i].id == id) {
+		let i;
+		let data = JSON.parse(localStorage[this._dbName]);
+		let todos = data.todos;
+		let todoId;
+
+		for (i = 0; i < todos.length; i++) {
+			if (todos[i].id === id) {
 				todoId = todos[i].id;
 			}
 		}
 
-		for (var i = 0; i < todos.length; i++) {
-			if (todos[i].id == todoId) {
+		for (i = 0; i < todos.length; i++) {
+			if (todos[i].id === todoId) {
 				todos.splice(i, 1);
 			}
 		}
@@ -143,17 +136,16 @@
 	};
 
 	/**
-	 * Will drop all storage and start fresh
-	 *
-	 * @param {function} callback The callback to fire after dropping the data
+	 * Supprime la base de données et en démarre une nouvelle.
+	 * @param {function} (callback) La fonction de rappel après la suppression de la base.
 	 */
 	Store.prototype.drop = function (callback) {
-		var data = {todos: []};
+		let data = {todos: []};
 		localStorage[this._dbName] = JSON.stringify(data);
 		callback.call(this, data.todos);
 	};
 
-	// Export to window
+	// Exporte vers window
 	window.app = window.app || {};
 	window.app.Store = Store;
 })(window);

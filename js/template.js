@@ -2,7 +2,7 @@
 (function (window) {
 	'use strict';
 
-	var htmlEscapes = {
+	let htmlEscapes = {
 		'&': '&amp;',
 		'<': '&lt;',
 		'>': '&gt;',
@@ -11,22 +11,21 @@
 		'`': '&#x60;'
 	};
 
-	var escapeHtmlChar = function (chr) {
+	let escapeHtmlChar = function (chr) {
 		return htmlEscapes[chr];
 	};
 
-	var reUnescapedHtml = /[&<>"'`]/g;
-	var reHasUnescapedHtml = new RegExp(reUnescapedHtml.source);
+	let reUnescapedHtml = /[&<>"'`]/g;
+	let reHasUnescapedHtml = new RegExp(reUnescapedHtml.source);
 
-	var escape = function (string) {
+	let escape = function (string) {
 		return (string && reHasUnescapedHtml.test(string))
 			? string.replace(reUnescapedHtml, escapeHtmlChar)
 			: string;
 	};
 
 	/**
-	 * Sets up defaults for all the Template methods such as a default template
-	 *
+	 * Définit les valeurs par défaut du template.
 	 * @constructor
 	 */
 	function Template() {
@@ -41,14 +40,10 @@
 	}
 
 	/**
-	 * Creates an <li> HTML string and returns it for placement in your app.
-	 *
-	 * NOTE: In real life you should be using a templating engine such as Mustache
-	 * or Handlebars, however, this is a vanilla JS example.
-	 *
-	 * @param {object} data The object containing keys you want to find in the
-	 *                      template to replace.
-	 * @returns {string} HTML String of an <li> element
+	 * Récupère le template par défaut et y injecte les informations de la nouvelle entrée.
+	 * @param {object} (data) L'objet contenant les clés que vous souhaitez trouver
+	 * dans le modèle à remplacer.
+	 * @returns {string} Chaîne HTML d'un élément <li>.
 	 *
 	 * @example
 	 * view.show({
@@ -58,13 +53,13 @@
 	 * });
 	 */
 	Template.prototype.show = function (data) {
-		var i, l;
-		var view = '';
+		let i, l;
+		let view = '';
 
 		for (i = 0, l = data.length; i < l; i++) {
-			var template = this.defaultTemplate;
-			var completed = '';
-			var checked = '';
+			let template = this.defaultTemplate;
+			let completed = '';
+			let checked = '';
 
 			if (data[i].completed) {
 				completed = 'completed';
@@ -83,22 +78,20 @@
 	};
 
 	/**
-	 * Displays a counter of how many to dos are left to complete
-	 *
-	 * @param {number} activeTodos The number of active todos.
-	 * @returns {string} String containing the count
+	 * Affiche le nombre d’entrées actives restantes.
+	 * @param {number} (activeTodos) Le nombre de to-dos actifs.
+	 * @returns {string} Une chaine contenant le nombre.
 	 */
 	Template.prototype.itemCounter = function (activeTodos) {
-		var plural = activeTodos === 1 ? '' : 's';
+		let plural = activeTodos === 1 ? '' : 's';
 
 		return '<strong>' + activeTodos + '</strong> item' + plural + ' left';
 	};
 
 	/**
-	 * Updates the text within the "Clear completed" button
-	 *
-	 * @param  {[type]} completedTodos The number of completed todos.
-	 * @returns {string} String containing the count
+	 * Affiche le bouton « Clear completed » dès qu’une entrée est terminée.
+	 * @param  {[type]} (completedTodos) Le nombre de todos achevés.
+	 * @returns {string} Une chaine contenant le nombre.
 	 */
 	Template.prototype.clearCompletedButton = function (completedTodos) {
 		if (completedTodos > 0) {
@@ -108,7 +101,7 @@
 		}
 	};
 
-	// Export to window
+	// Exporte vers window
 	window.app = window.app || {};
 	window.app.Template = Template;
 })(window);

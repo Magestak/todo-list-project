@@ -4,14 +4,11 @@
 	'use strict';
 
 	/**
-	     * View that abstracts away the browser's DOM completely.
-	     * It has two simple entry points:
-	     *
-	     *   - bind(eventName, handler)
-	     *     Takes a todo application event and registers the handler
-	     *   - render(command, parameterObject)
-	     *     Renders the given command with the options
-	     */
+	 * La fonction view permet deux types d’actions :
+	 * - attacher un évènement d'une tâche donnée avec un gestionnaire d'évènement (bind) et
+	 * - faire le rendu d'une commande avec ses options (render).
+	 * Définit le template à utiliser et prépare les éléments à cibler via les classes CSS.
+	 */
 	function View(template) {
 		this.template = template;
 
@@ -27,26 +24,48 @@
 		this.$newTodo = qs('.new-todo');
 	}
 
+	/**
+	 * Supprime l’élément contenant une entrée.
+	 * @param {number} (id) L'ID de l'élement à supprimer.
+	 * @private
+	 */
 	View.prototype._removeItem = function (id) {
-		var elem = qs('[data-id="' + id + '"]');
+		let elem = qs('[data-id="' + id + '"]');
 
 		if (elem) {
 			this.$todoList.removeChild(elem);
 		}
 	};
 
+	/**
+	 * Affiche ou cache le bouton « Clear completed ».
+	 * @param {number} (completedCount) Le nombre de to-dos cochés.
+	 * @param {boolean} (visible) True si visible, false sinon.
+	 * @private
+	 */
 	View.prototype._clearCompletedButton = function (completedCount, visible) {
 		this.$clearCompleted.innerHTML = this.template.clearCompletedButton(completedCount);
 		this.$clearCompleted.style.display = visible ? 'block' : 'none';
 	};
 
+	/**
+	 * Indique la page actuelle.
+	 * @param {string} (currentPage) Qui peut être '' || active || completed
+	 * @private
+	 */
 	View.prototype._setFilter = function (currentPage) {
 		qs('.filters .selected').className = '';
 		qs('.filters [href="#/' + currentPage + '"]').className = 'selected';
 	};
 
+	/**
+	 * Barre une entrée si elle a la classe « .completed », et enlève la barre sinon.
+	 * @param {number} (id) L'ID de l'élément.
+	 * @param {boolean} (completed) Le statut de l'élément.
+	 * @private
+	 */
 	View.prototype._elementComplete = function (id, completed) {
-		var listItem = qs('[data-id="' + id + '"]');
+		let listItem = qs('[data-id="' + id + '"]');
 
 		if (!listItem) {
 			return;
@@ -54,12 +73,18 @@
 
 		listItem.className = completed ? 'completed' : '';
 
-		// In case it was toggled from an event and not by clicking the checkbox
+		// Au cas où il a été basculé à partir d'un événement et non en cliquant sur la chackbox.
 		qs('input', listItem).checked = completed;
 	};
 
+	/**
+	 * Permet l' édition d'un élément.
+	 * @param {number} (id) L'ID de l'élément.
+	 * @param {string} (title) Le contenu du to-do.
+	 * @private
+	 */
 	View.prototype._editItem = function (id, title) {
-		var listItem = qs('[data-id="' + id + '"]');
+		let listItem = qs('[data-id="' + id + '"]');
 
 		if (!listItem) {
 			return;
@@ -67,7 +92,7 @@
 
 		listItem.className = listItem.className + ' editing';
 
-		var input = document.createElement('input');
+		let input = document.createElement('input');
 		input.className = 'edit';
 
 		listItem.appendChild(input);
@@ -75,14 +100,20 @@
 		input.value = title;
 	};
 
+	/**
+	 * Retourne à l’affichage initial d’une entrée qui vient d’être modifiée.
+	 * @param {number} (id) L'ID tu to-do.
+	 * @param {string} (title) Le contenu du to-do.
+	 * @private
+	 */
 	View.prototype._editItemDone = function (id, title) {
-		var listItem = qs('[data-id="' + id + '"]');
+		let listItem = qs('[data-id="' + id + '"]');
 
 		if (!listItem) {
 			return;
 		}
 
-		var input = qs('input.edit', listItem);
+		let input = qs('input.edit', listItem);
 		listItem.removeChild(input);
 
 		listItem.className = listItem.className.replace('editing', '');
@@ -92,39 +123,55 @@
 		});
 	};
 
+	/**
+	 * lance une des fonctions d’affichage selon la commande en paramètre.
+	 * @param {string} (viewCmd) La fonction active.
+	 * @param {object} (parameter)
+	 */
 	View.prototype.render = function (viewCmd, parameter) {
-		var self = this;
-		var viewCommands = {
+		let self = this;
+		let viewCommands = {
+			// Affiche les todos.
 			showEntries: function () {
 				self.$todoList.innerHTML = self.template.show(parameter);
 			},
+			// Supprime un to-do.
 			removeItem: function () {
 				self._removeItem(parameter);
 			},
+			//  Met à jour le nombre de todos.
 			updateElementCount: function () {
 				self.$todoItemCounter.innerHTML = self.template.itemCounter(parameter);
 			},
+			//  Mets à jour le bouton Clear completed.
 			clearCompletedButton: function () {
 				self._clearCompletedButton(parameter.completed, parameter.visible);
 			},
+			// Affiche ou masque le "footer" de la to-do-list.
 			contentBlockVisibility: function () {
 				self.$main.style.display = self.$footer.style.display = parameter.visible ? 'block' : 'none';
 			},
+			// Marque tous les éléments comme "Completed".
 			toggleAll: function () {
 				self.$toggleAll.checked = parameter.checked;
 			},
+			// Gère l'affichage des filtres (url).
 			setFilter: function () {
 				self._setFilter(parameter);
 			},
+			// Vide le champ texte principal de la to-do-list après création.
 			clearNewTodo: function () {
 				self.$newTodo.value = '';
 			},
+			// Gère l'affichage pour l'ajout d'un nouveau to-do.
 			elementComplete: function () {
 				self._elementComplete(parameter.id, parameter.completed);
 			},
+			// Gère l'affichage d'un to-do en cours de modification.
 			editItem: function () {
 				self._editItem(parameter.id, parameter.title);
 			},
+			// Gère l'affichage d'un to-do dont la modification vient d'être terminée.
 			editItemDone: function () {
 				self._editItemDone(parameter.id, parameter.title);
 			}
@@ -133,13 +180,24 @@
 		viewCommands[viewCmd]();
 	};
 
+	/**
+	 * Récupère l'ID d'un to-do.
+	 * @param {object} (element) L'élément actif.
+	 * @returns {number} L'ID de l'élément.
+	 * @private
+	 */
 	View.prototype._itemId = function (element) {
-		var li = $parent(element, 'li');
+		let li = $parent(element, 'li');
 		return parseInt(li.dataset.id, 10);
 	};
 
+	/**
+	 * Gère l'affichage lors de la perte de focus du to-do en cours d'édition.
+	 * @param {function} (handler) Un callback exécuté sous condition.
+	 * @private
+	 */
 	View.prototype._bindItemEditDone = function (handler) {
-		var self = this;
+		let self = this;
 		$delegate(self.$todoList, 'li .edit', 'blur', function () {
 			if (!this.dataset.iscanceled) {
 				handler({
@@ -151,15 +209,19 @@
 
 		$delegate(self.$todoList, 'li .edit', 'keypress', function (event) {
 			if (event.keyCode === self.ENTER_KEY) {
-				// Remove the cursor from the input when you hit enter just like if it
-				// were a real form
+				// Retire le curseur de l'input lorsque l'on appuie sur entrée.
 				this.blur();
 			}
 		});
 	};
 
+	/**
+	 * Gère l'affichage du to-do dont la modification est annulée.
+	 * @param {function} (handler) Un callback exécuté sous condition.
+	 * @private
+	 */
 	View.prototype._bindItemEditCancel = function (handler) {
-		var self = this;
+		let self = this;
 		$delegate(self.$todoList, 'li .edit', 'keyup', function (event) {
 			if (event.keyCode === self.ESCAPE_KEY) {
 				this.dataset.iscanceled = true;
@@ -170,8 +232,14 @@
 		});
 	};
 
+	/**
+	 * Gestionnaire d’évènements qui permet d’effectuer un rendu particulier en
+	 * fonction des actions réalisées par l’utilisateur.
+	 * @param {function} (event) Le type d'évenement.
+	 * @param {function} (handler) La fonction de callback associée.
+	 */
 	View.prototype.bind = function (event, handler) {
-		var self = this;
+		let self = this;
 		if (event === 'newTodo') {
 			$on(self.$newTodo, 'change', function () {
 				handler(self.$newTodo.value);
@@ -213,7 +281,7 @@
 		}
 	};
 
-	// Export to window
+	// Exporte vers Window.
 	window.app = window.app || {};
 	window.app.View = View;
 }(window));
