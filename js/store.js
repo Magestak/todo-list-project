@@ -3,9 +3,12 @@
 	'use strict';
 
 	/**
-	 * Créé une nouvelle base de données dans le LocalStorage du navigateur si elle n’existe pas déjà.
-	 * @param {string} (name) Le nom de la base de données.
-	 * @param {function} (callback) La fonction de rappel.
+	 * Creates a new client side storage object and will create an empty
+	 * collection if no collection already exists.
+	 *
+	 * @param {string} (name) The name of our DB we want to use
+	 * @param {function} (callback) Our fake DB uses callbacks because in
+	 * real life you probably would be making AJAX calls
 	 */
 	function Store(name, callback) {
 		callback = callback || function () {};
@@ -24,14 +27,16 @@
 	}
 
 	/**
-	 * Récupère une donnée dans la base de données à partir d’une requête (query).
-	 * @param {object} (query) La requête à comparer (c'est-à-dire {foo : 'bar').
-	 * @param {function} (callback)	 La fonction de rappel à déclencher lorsque l' exécution
-	 * de la requête est terminée.
+	 * Finds items based on a query given as a JS object
+	 *
+	 * @param {object} (query) The query to match against (i.e. {foo: 'bar'})
+	 * @param {function} (callback)	 The callback to fire when the query has
+	 * completed running
+	 *
 	 * @example
 	 * db.find({foo: 'bar', hello: 'world'}, function (data) {
-	 *	 // Données retournera tous les éléments qui ont foo: bar et
-	 *	 // hello: world dans leurs propriétés
+	 *	 // data will return any items that have foo: bar and
+	 *	 // hello: world in their properties
 	 * });
 	 */
 	Store.prototype.find = function (query, callback) {
@@ -52,8 +57,9 @@
 	};
 
 	/**
-	 * Récupère toutes les données de la base de données.
-	 * @param {function} (callback) La fonction de rappel lors de la récupération des données.
+	 * Will retrieve all data from the collection
+	 *
+	 * @param {function} (callback) The callback to fire upon retrieving data.
 	 */
 	Store.prototype.findAll = function (callback) {
 		callback = callback || function () {};
@@ -61,11 +67,12 @@
 	};
 
 	/**
-	 * Enregistre (si elle n’existe pas) ou met à jour (si elle existe) une entrée dans la
-	 base de données.
-	 * @param {object} (updateData) Les données à sauvegarder dans la base de données.
-	 * @param {function} (callback) La fonction de rappel après l'enregistrement.
-	 * @param {number} (id) Un paramètre optionnel correspondant à l'élément à mettre à jour.
+	 * Will save the given data to the DB. If no item exists it will create a new
+	 * item, otherwise it'll simply update an existing item's properties
+	 *
+	 * @param {object} (updateData) The data to save back into the DB
+	 * @param {function} (callback) The callback to fire after saving
+	 * @param {number} (id) An optional param to enter an ID of an item to update
 	 */
 	Store.prototype.save = function (updateData, callback, id) {
 		let data = JSON.parse(localStorage[this._dbName]);
@@ -73,7 +80,7 @@
 
 		callback = callback || function () {};
 
-		// Correction bug 2 = conflit éventuel entre deux IDs identiques
+		// Fixed bug 2 = possible conflict between two identical IDs
 		// Generate unique ID
 		let newId = (new Date().getTime());
 		console.log(newId);
@@ -83,7 +90,7 @@
      		newId += charset.charAt(Math.floor(Math.random() * charset.length));
 		}
 
-		// Si un ID a été donné, trouve l'élément et met à jour les propriétés.
+		// If an ID was actually given, find the item and update each property
 		if (id) {
 			for (let i = 0; i < todos.length; i++) {
 				if (todos[i].id === id) {
@@ -109,9 +116,10 @@
 	};
 
 	/**
-	 * Supprime une entrée de la base en fonction de son identifiant.
-	 * @param {number} (id ) L'ID de l'entrée à supprimer.
-	 * @param {function} (callback) La fonction de rappel après l'enregistrement.
+	 * Will remove an item from the Store based on its ID
+	 *
+	 * @param {number} (id) The ID of the item you want to remove
+	 * @param {function} (callback) The callback to fire after saving
 	 */
 	Store.prototype.remove = function (id, callback) {
 		let i;
@@ -136,8 +144,9 @@
 	};
 
 	/**
-	 * Supprime la base de données et en démarre une nouvelle.
-	 * @param {function} (callback) La fonction de rappel après la suppression de la base.
+	 * Will drop all storage and start fresh
+	 *
+	 * @param {function} (callback) The callback to fire after dropping the data
 	 */
 	Store.prototype.drop = function (callback) {
 		let data = {todos: []};

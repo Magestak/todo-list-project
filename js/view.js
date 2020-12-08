@@ -4,10 +4,15 @@
 	'use strict';
 
 	/**
-	 * La fonction view permet deux types d’actions :
-	 * - attacher un évènement d'une tâche donnée avec un gestionnaire d'évènement (bind) et
-	 * - faire le rendu d'une commande avec ses options (render).
-	 * Définit le template à utiliser et prépare les éléments à cibler via les classes CSS.
+	 * View that abstracts away the browser's DOM completely.
+	 * It has two simple entry points:
+	 *   - bind(eventName, handler)
+	 *     Takes a todo application event and registers the handler
+	 *   - render(command, parameterObject)
+	 *     Renders the given command with the options
+	 *
+	 * @param {object} (template)
+	 * @constructor
 	 */
 	function View(template) {
 		this.template = template;
@@ -25,8 +30,10 @@
 	}
 
 	/**
-	 * Supprime l’élément contenant une entrée.
-	 * @param {number} (id) L'ID de l'élement à supprimer.
+	 * Will remove an item from the View based on its ID
+	 *
+	 * @param {number} (id) The ID of the item you want to remove
+	 *
 	 * @private
 	 */
 	View.prototype._removeItem = function (id) {
@@ -38,9 +45,11 @@
 	};
 
 	/**
-	 * Affiche ou cache le bouton « Clear completed ».
-	 * @param {number} (completedCount) Le nombre de to-dos cochés.
-	 * @param {boolean} (visible) True si visible, false sinon.
+	 * Will toggle the "Clear completed" button.
+	 *
+	 * @param {number} (completedCount) Number of completed tasks.
+	 * @param {boolean} (visible) Is visible or not.
+	 *
 	 * @private
 	 */
 	View.prototype._clearCompletedButton = function (completedCount, visible) {
@@ -49,9 +58,9 @@
 	};
 
 	/**
-	 * Indique la page actuelle.
-	 * @param {string} (currentPage) Qui peut être '' || active || completed
-	 * @private
+	 * Update the view according to the selected filter
+	 *
+	 * @param {string} (currentPage) Value of the current URL route.
 	 */
 	View.prototype._setFilter = function (currentPage) {
 		qs('.filters .selected').className = '';
@@ -59,9 +68,11 @@
 	};
 
 	/**
-	 * Barre une entrée si elle a la classe « .completed », et enlève la barre sinon.
-	 * @param {number} (id) L'ID de l'élément.
-	 * @param {boolean} (completed) Le statut de l'élément.
+	 * Update the view when a task is completed.
+	 *
+	 * @param {number} (id) The ID of the selected task.
+	 * @param {boolean} (completed) Task is completed or not.
+	 *
 	 * @private
 	 */
 	View.prototype._elementComplete = function (id, completed) {
@@ -78,9 +89,11 @@
 	};
 
 	/**
-	 * Permet l' édition d'un élément.
-	 * @param {number} (id) L'ID de l'élément.
-	 * @param {string} (title) Le contenu du to-do.
+	 * Trigger the edit mode (input field with the current title)
+	 *
+	 * @param {number} (id) The ID of the selected task.
+	 * @param {string} (title) Current task title that will be in the input field.
+	 *
 	 * @private
 	 */
 	View.prototype._editItem = function (id, title) {
@@ -101,9 +114,11 @@
 	};
 
 	/**
-	 * Retourne à l’affichage initial d’une entrée qui vient d’être modifiée.
-	 * @param {number} (id) L'ID tu to-do.
-	 * @param {string} (title) Le contenu du to-do.
+	 * End the edit mode and display the new value.
+	 *
+	 * @param {number} (id) The ID of the edited task.
+	 * @param {string} (title) New task title.
+	 *
 	 * @private
 	 */
 	View.prototype._editItemDone = function (id, title) {
@@ -124,54 +139,55 @@
 	};
 
 	/**
-	 * lance une des fonctions d’affichage selon la commande en paramètre.
-	 * @param {string} (viewCmd) La fonction active.
-	 * @param {object} (parameter)
+	 * Update the view according to the command called by Controller.js.
+	 *
+	 * @param {function} (viewCmd) Command called by Controller.js.
+	 * @param {object} (parameter) Parameters of the called function.
 	 */
 	View.prototype.render = function (viewCmd, parameter) {
 		let self = this;
 		let viewCommands = {
-			// Affiche les todos.
+			// Displays the todos.
 			showEntries: function () {
 				self.$todoList.innerHTML = self.template.show(parameter);
 			},
-			// Supprime un to-do.
+			// Deletes a todo.
 			removeItem: function () {
 				self._removeItem(parameter);
 			},
-			//  Met à jour le nombre de todos.
+			// Updates the number of todos.
 			updateElementCount: function () {
 				self.$todoItemCounter.innerHTML = self.template.itemCounter(parameter);
 			},
-			//  Mets à jour le bouton Clear completed.
+			// Updates the Clear completed button.
 			clearCompletedButton: function () {
 				self._clearCompletedButton(parameter.completed, parameter.visible);
 			},
-			// Affiche ou masque le "footer" de la to-do-list.
+			// Shows or hides the "footer" of the to-do-list.
 			contentBlockVisibility: function () {
 				self.$main.style.display = self.$footer.style.display = parameter.visible ? 'block' : 'none';
 			},
-			// Marque tous les éléments comme "Completed".
+			// Marks all items as "Completed".
 			toggleAll: function () {
 				self.$toggleAll.checked = parameter.checked;
 			},
-			// Gère l'affichage des filtres (url).
+			// Manages the display of filters (url).
 			setFilter: function () {
 				self._setFilter(parameter);
 			},
-			// Vide le champ texte principal de la to-do-list après création.
+			// Empty the main text field of the to-do-list after creation.
 			clearNewTodo: function () {
 				self.$newTodo.value = '';
 			},
-			// Gère l'affichage pour l'ajout d'un nouveau to-do.
+			// Manages the display for adding a new to-do.
 			elementComplete: function () {
 				self._elementComplete(parameter.id, parameter.completed);
 			},
-			// Gère l'affichage d'un to-do en cours de modification.
+			// Manages the display of a to-do being modified.
 			editItem: function () {
 				self._editItem(parameter.id, parameter.title);
 			},
-			// Gère l'affichage d'un to-do dont la modification vient d'être terminée.
+			// Manages the display of a to-do whose modification has just been completed.
 			editItemDone: function () {
 				self._editItemDone(parameter.id, parameter.title);
 			}
@@ -181,9 +197,10 @@
 	};
 
 	/**
-	 * Récupère l'ID d'un to-do.
-	 * @param {object} (element) L'élément actif.
-	 * @returns {number} L'ID de l'élément.
+	 * Add the task ID to the targeted element.
+	 *
+	 * @param {object} (element) Targeted element.
+	 *
 	 * @private
 	 */
 	View.prototype._itemId = function (element) {
@@ -192,8 +209,10 @@
 	};
 
 	/**
-	 * Gère l'affichage lors de la perte de focus du to-do en cours d'édition.
-	 * @param {function} (handler) Un callback exécuté sous condition.
+	 * Add events handlers to the edit mode : Enter keyboard press and loosing focus on the edit input field.
+	 *
+	 * @param {function} (handler) Callback function.
+	 *
 	 * @private
 	 */
 	View.prototype._bindItemEditDone = function (handler) {
@@ -216,8 +235,10 @@
 	};
 
 	/**
-	 * Gère l'affichage du to-do dont la modification est annulée.
-	 * @param {function} (handler) Un callback exécuté sous condition.
+	 * Add events handler that cancel the edit mode when you press the Escape key.
+	 *
+	 * @param {function} (handler) Callback function.
+	 *
 	 * @private
 	 */
 	View.prototype._bindItemEditCancel = function (handler) {
@@ -233,10 +254,10 @@
 	};
 
 	/**
-	 * Gestionnaire d’évènements qui permet d’effectuer un rendu particulier en
-	 * fonction des actions réalisées par l’utilisateur.
-	 * @param {function} (event) Le type d'évenement.
-	 * @param {function} (handler) La fonction de callback associée.
+	 * Bind Controller.js functions to the view.
+	 *
+	 * @param {function} (event) Event called by Controller.
+	 * @param {function} (handler) Callback function.
 	 */
 	View.prototype.bind = function (event, handler) {
 		let self = this;
@@ -281,7 +302,7 @@
 		}
 	};
 
-	// Exporte vers Window.
+	// Export to window
 	window.app = window.app || {};
 	window.app.View = View;
 }(window));

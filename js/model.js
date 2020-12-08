@@ -2,18 +2,20 @@
 	'use strict';
 
 	/**
-	 *  Créé un nouveau modèle et lui associe une base de données (LocalStorage).
+	 * Creates a new Model instance and hooks up the storage.
+	 *
 	 * @constructor
-	 * @param {object} (storage) Une référence à la classe de stockage côté client.
+	 * @param {object} (storage) A reference to the client side storage class
 	 */
 	function Model(storage) {
 		this.storage = storage;
 	}
 
 	/**
-	 * Créé un nouveau modèle pour la to-do.
-	 * @param {string} (title) Le contenu de la tâche.
-	 * @param {function} (callback) La fonction de rappel après la création du modèle.
+	 * Creates a new todo model
+	 *
+	 * @param {string} (title) The title of the task
+	 * @param {function} (callback) The callback to fire after the model is created
 	 */
 	Model.prototype.create = function (title, callback) {
 		title = title || '';
@@ -28,14 +30,18 @@
 	};
 
 	/**
-	 * Récupère dans la base un modèle to-do selon une requête (ID ou nom). Si
-	 * l’argument requête n’est pas renseigné, cela retourne toutes les entrées de la base.
-	 * @param {string|number|object} (query) Une requête pour faire correspondre les modèles.
-	 * @param {function} (callback) La fonction de rappel après la découverte du modèle.
+	 * Finds and returns a model in storage. If no query is given it'll simply
+	 * return everything. If you pass in a string or number it'll look that up as
+	 * the ID of the model to find. Lastly, you can pass it an object to match
+	 * against.
+	 *
+	 * @param {string|number|object} (query) A query to match models against
+	 * @param {function} (callback) The callback to fire after the model is found
+	 *
 	 * @example
-	 * model.read(1, func); // Trouvera le model avec un ID de 1.
-	 * model.read('1'); // Comme ci-dessus.
-	 * // Vous trouverez ci-dessous un modèle avec foo égal à bar et un hello égal à world.
+	 * model.read(1, func); // Will find the model with an ID of 1
+	 * model.read('1'); // Same as above
+	 * //Below will find a model with foo equalling bar and hello equalling world.
 	 * model.read({ foo: 'bar', hello: 'world' });
 	 */
 	Model.prototype.read = function (query, callback) {
@@ -54,35 +60,40 @@
 	};
 
 	/**
-	 * Met à jour un to-do en le sauvegardant dans la base.
-	 * @param {number} (id) L'ID du to-do à mettre à jour.
-	 * @param {object} (data) Les propriétés à mettre à jour avec les nouvelles valeurs.
-	 * @param {function} (callback) La fonction de rappel quand la mise à jour est terminée.
+	 * Updates a model by giving it an ID, data to update, and a callback to fire when
+	 * the update is complete.
+	 *
+	 * @param {number} (id) The id of the model to update
+	 * @param {object} (data) The properties to update and their new value
+	 * @param {function} (callback) The callback to fire when the update is complete.
 	 */
 	Model.prototype.update = function (id, data, callback) {
 		this.storage.save(data, callback, id);
 	};
 
 	/**
-	 * Supprime un to-do de la base de données.
-	 * @param {number} (id) L'ID du to-do à supprimer.
-	 * @param {function} (callback) La fonction de rappel lorsque la suppression est terminée.
+	 * Removes a model from storage
+	 *
+	 * @param {number} (id) The ID of the model to remove
+	 * @param {function} (callback) The callback to fire when the removal is complete.
 	 */
 	Model.prototype.remove = function (id, callback) {
 		this.storage.remove(id, callback);
 	};
 
 	/**
-	 * ATTENTION: Supprime toutes les données de la base.
-	 * @param {function} (callback) La fonction de rappel quand le stockage est vide.
+	 * WARNING: Will remove ALL data from storage.
+	 *
+	 * @param {function} callback The callback to fire when the storage is wiped.
 	 */
 	Model.prototype.removeAll = function (callback) {
 		this.storage.drop(callback);
 	};
 
 	/**
-	 * Retourne le compte de tous les to-dos.
-	 * @param {function} (callback) La fonction de rappel.
+	 * Returns a count of all todos
+	 *
+	 * @param {function} (callback) The callback to fire.
 	 */
 	Model.prototype.getCount = function (callback) {
 		let todos = {
@@ -91,7 +102,7 @@
 			total: 0
 		};
 
-		// Récupère toutes les données.
+		// Recovers all data.
 		this.storage.findAll(function (data) {
 			data.forEach(function (todo) {
 				if (todo.completed) {
@@ -106,7 +117,7 @@
 		});
 	};
 
-	// Exporte vers window.
+	// Export to window
 	window.app = window.app || {};
 	window.app.Model = Model;
 })(window);
