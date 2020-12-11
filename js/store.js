@@ -81,7 +81,7 @@
 		callback = callback || function () {};
 
 		// Fixed bug 2 = possible conflict between two identical IDs
-		// Generate unique ID
+		// Generate ID
 		let newId = (new Date().getTime());
 		console.log(newId);
 	    let charset = "0123456789";

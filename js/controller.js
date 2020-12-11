@@ -94,7 +94,7 @@
 	 *
 	 * @param {string} (title) The new element
 	 */
-	Controller.prototype.addItem = function (title) { // Etape 1: correction bug 1 = faute de frappe
+	Controller.prototype.addItem = function (title) { // Step 1: corrected bug 1 = typing error
 		let self = this;
 
 		if (title.trim() === '') {
@@ -168,9 +168,14 @@
 			items = data;
 		});
 
+		items.forEach(function(item) {
+			if (item.id === id) {
+				console.log("Element with ID: " + id + " has been removed.");
+			}
+		});
+
 		self.model.remove(id, function () {
 			self.view.render('removeItem', id);
-			console.log("Element with ID: " + id + " has been removed.");
 		});
 
 		self._filter();
@@ -233,6 +238,8 @@
 	/**
 	 * Updates the pieces of the page which change depending on the remaining
 	 * number of todos.
+	 *
+	 * @private
 	 */
 	Controller.prototype._updateCount = function () {
 		let self = this;
@@ -252,15 +259,17 @@
 	 * Re-filters the todo items, based on the active route.
 	 *
 	 * @param {boolean|undefined} (force)  forces a re-painting of todo items.
+	 *
+	 * @private
 	 */
 	Controller.prototype._filter = function (force) {
 		let activeRoute = this._activeRoute.charAt(0).toUpperCase() + this._activeRoute.substr(1);
 
-		// Mettre à jour les éléments sur la page qui changent à chaque fois.
+		// Update the elements on the page, which change with each completed todo
 		this._updateCount();
 
-		// Si la dernière route active n'est pas "All", ou si nous changeons de route,nous recréons
-		// les éléments de l'élément to-do, en appelant:
+		// If the last active route isn't "All", or we're switching routes, we
+		// re-create the todo item elements, calling:
 		// this.show[All|Active|Completed]();
 		if (force || this._lastActiveRoute !== 'All' || this._lastActiveRoute !== activeRoute) {
 			this['show' + activeRoute]();
@@ -273,6 +282,8 @@
 	 * Simply updates the filter nav's selected states
 	 *
 	 * @param {string} (currentPage) '' || active || completed The route to the current page.
+	 *
+	 * @private
 	 */
 	Controller.prototype._updateFilterState = function (currentPage) {
 		// Store a reference to the active route, allowing us to re-filter todo

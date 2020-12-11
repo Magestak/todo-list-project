@@ -84,7 +84,7 @@
 
 		listItem.className = completed ? 'completed' : '';
 
-		// Au cas où il a été basculé à partir d'un événement et non en cliquant sur la chackbox.
+		// In case it was toggled from an event and not by clicking the checkbox
 		qs('input', listItem).checked = completed;
 	};
 
@@ -228,7 +228,8 @@
 
 		$delegate(self.$todoList, 'li .edit', 'keypress', function (event) {
 			if (event.keyCode === self.ENTER_KEY) {
-				// Retire le curseur de l'input lorsque l'on appuie sur entrée.
+				// Remove the cursor from the input when you hit enter just like if it
+				// were a real form
 				this.blur();
 			}
 		});
