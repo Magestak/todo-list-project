@@ -126,6 +126,9 @@
 	Controller.prototype.editItemSave = function (id, title) {
 		let self = this;
 
+		// Remplacement des 2 boucles while ci-dessous par une expression régulière (RegExp)
+		title = title.replace(/^\s+|\s+$/g, '');
+		/*
 		while (title[0] === " ") {
 			title = title.slice(1);
 		}
@@ -133,6 +136,7 @@
 		while (title[title.length-1] === " ") {
 			title = title.slice(0, -1);
 		}
+		*/
 
 		if (title.length !== 0) {
 			self.model.update(id, {title: title}, function () {
@@ -163,6 +167,9 @@
 	 */
 	Controller.prototype.removeItem = function (id) {
 		let self = this;
+
+		// Suppression de la boucle forEach non nécessaire, utilisée uniquement pour un affichage en console.
+		/*
 		let items;
 		self.model.read(function(data) {
 			items = data;
@@ -173,6 +180,7 @@
 				console.log("Element with ID: " + id + " has been removed.");
 			}
 		});
+		*/
 
 		self.model.remove(id, function () {
 			self.view.render('removeItem', id);

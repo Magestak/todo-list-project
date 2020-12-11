@@ -210,19 +210,12 @@ describe('controller', function () {
 		it('should toggle all todos to completed', function () {
 			// TODO: write test
 			// Given
-			let todos = [
-				{
+			let todo = {
 				id: 42,
 				title: 'my todo',
 				completed: false
-				},
-				{
-				id: 43,
-				title: 'another todo',
-				completed: false
-				}
-			];
-			setUpModel(todos);
+			};
+			setUpModel([todo]);
 
 			// When
 			subject.setView('');
@@ -230,25 +223,17 @@ describe('controller', function () {
 
 			// Then
 			expect(model.update).toHaveBeenCalledWith(42, {completed: true}, jasmine.any(Function));
-			expect(model.update).toHaveBeenCalledWith(43, {completed: true}, jasmine.any(Function));
 		});
 
 		it('should update the view', function () {
 			// TODO: write test
 			// Given
-			let todos = [
-				{
+			let todo = {
 				id: 42,
 				title: 'my todo',
 				completed: false
-				},
-				{
-				id: 43,
-				title: 'another todo',
-				completed: false
-				}
-			];
-			setUpModel([todos]);
+				};
+			setUpModel([todo]);
 
 			// When
 			subject.setView('');

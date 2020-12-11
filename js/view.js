@@ -262,44 +262,49 @@
 	 */
 	View.prototype.bind = function (event, handler) {
 		let self = this;
-		if (event === 'newTodo') {
-			$on(self.$newTodo, 'change', function () {
-				handler(self.$newTodo.value);
-			});
-
-		} else if (event === 'removeCompleted') {
-			$on(self.$clearCompleted, 'click', function () {
-				handler();
-			});
-
-		} else if (event === 'toggleAll') {
-			$on(self.$toggleAll, 'click', function () {
-				handler({completed: this.checked});
-			});
-
-		} else if (event === 'itemEdit') {
-			$delegate(self.$todoList, 'li label', 'dblclick', function () {
-				handler({id: self._itemId(this)});
-			});
-
-		} else if (event === 'itemRemove') {
-			$delegate(self.$todoList, '.destroy', 'click', function () {
-				handler({id: self._itemId(this)});
-			});
-
-		} else if (event === 'itemToggle') {
-			$delegate(self.$todoList, '.toggle', 'click', function () {
-				handler({
-					id: self._itemId(this),
-					completed: this.checked
+		// Replaced if / else if with a switch
+		switch (event) {
+			case "newTodo":
+				$on(self.$newTodo, "change", function() {
+					handler(self.$newTodo.value);
 				});
-			});
-
-		} else if (event === 'itemEditDone') {
-			self._bindItemEditDone(handler);
-
-		} else if (event === 'itemEditCancel') {
-			self._bindItemEditCancel(handler);
+				break;
+			case "removeCompleted":
+				$on(self.$clearCompleted, "click", function() {
+					handler();
+				});
+				break;
+			case "toggleAll":
+				$on(self.$toggleAll, "click", function() {
+					handler({ completed: this.checked });
+				});
+				break;
+			case "itemEdit":
+				$delegate(self.$todoList, "li label", "dblclick", function() {
+					handler({ id: self._itemId(this) });
+				});
+				break;
+			case "itemRemove":
+				$delegate(self.$todoList, ".destroy", "click", function() {
+					handler({ id: self._itemId(this) });
+				});
+				break;
+			case "itemToggle":
+				$delegate(self.$todoList, ".toggle", "click", function() {
+					handler({
+						id: self._itemId(this),
+						completed: this.checked
+					});
+				});
+				break;
+			case "itemEditDone":
+				self._bindItemEditDone(handler);
+				break;
+			case "itemEditCancel":
+				self._bindItemEditCancel(handler);
+				break;
+			default:
+				console.log("Unexpected value");
 		}
 	};
 

@@ -58,10 +58,9 @@
 	 * });
 	 */
 	Template.prototype.show = function (data) {
-		let i, l;
 		let view = '';
 
-		for (i = 0, l = data.length; i < l; i++) {
+		for (let i = 0; i < data.length; i++) {
 			let template = this.defaultTemplate;
 			let completed = '';
 			let checked = '';

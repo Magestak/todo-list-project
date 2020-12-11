@@ -122,18 +122,15 @@
 	 * @param {function} (callback) The callback to fire after saving
 	 */
 	Store.prototype.remove = function (id, callback) {
-		let i;
 		let data = JSON.parse(localStorage[this._dbName]);
 		let todos = data.todos;
 		let todoId;
 
-		for (i = 0; i < todos.length; i++) {
+		// Regroupement et optimisation des 2 anciennes boucles for.
+		for (let i = 0; i < todos.length; i++) {
 			if (todos[i].id === id) {
 				todoId = todos[i].id;
 			}
-		}
-
-		for (i = 0; i < todos.length; i++) {
 			if (todos[i].id === todoId) {
 				todos.splice(i, 1);
 			}
