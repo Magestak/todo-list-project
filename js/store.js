@@ -126,7 +126,7 @@
 		let todos = data.todos;
 		let todoId;
 
-		// Regroupement et optimisation des 2 anciennes boucles for.
+		// Grouping and optimization of the 2 old for loops.
 		for (let i = 0; i < todos.length; i++) {
 			if (todos[i].id === id) {
 				todoId = todos[i].id;

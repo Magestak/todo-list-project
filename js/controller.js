@@ -126,8 +126,9 @@
 	Controller.prototype.editItemSave = function (id, title) {
 		let self = this;
 
-		// Remplacement des 2 boucles while ci-dessous par une expression régulière (RegExp)
+		// Replacement of the 2 while loops below by a regular expression (RegExp)
 		title = title.replace(/^\s+|\s+$/g, '');
+
 		/*
 		while (title[0] === " ") {
 			title = title.slice(1);
@@ -168,7 +169,7 @@
 	Controller.prototype.removeItem = function (id) {
 		let self = this;
 
-		// Suppression de la boucle forEach non nécessaire, utilisée uniquement pour un affichage en console.
+		// Removal of the unnecessary forEach loop, used only for a console display.
 		/*
 		let items;
 		self.model.read(function(data) {

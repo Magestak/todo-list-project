@@ -262,7 +262,7 @@
 	 */
 	View.prototype.bind = function (event, handler) {
 		let self = this;
-		// Replaced if / else if with a switch
+		// Replacement if / else if with a switch
 		switch (event) {
 			case "newTodo":
 				$on(self.$newTodo, "change", function() {
