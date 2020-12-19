@@ -4,7 +4,7 @@
 
 	/**
 	 * Sets up a brand new Todo list.
-	 *
+	 * @module App
 	 * @param {string} (name) The name of your new to do list.
 	 */
 	function Todo(name) {
@@ -22,6 +22,7 @@
 
 	/**
 	 * Set up the appropriate view and template according to the URL route.
+	 * @func setView
 	 */
 	function setView() {
 		todo.controller.setView(document.location.hash);
