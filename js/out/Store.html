@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Global</title>
+    <title>JSDoc: Class: Store</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Class: Store</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Store<span class="signature">((name), (callback))</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -38,7 +38,102 @@
     
         
 
+    
+
+    
+    <h4 class="name" id="Store"><span class="type-signature"></span>new Store<span class="signature">((name), (callback))</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Creates a new client side storage object and will create an emptycollection if no collection already exists.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>(name)</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name of our DB we want to use</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>(callback)</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Our fake DB uses callbacks because inreal life you probably would be making AJAX calls</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
 
 
 <dl class="details">
@@ -68,6 +163,11 @@
     
 
     
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="store.js.html">store.js</a>, <a href="store.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
 
     
 
@@ -77,7 +177,24 @@
 </dl>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     </div>
 
@@ -104,7 +221,7 @@
     
 
     
-    <h4 class="name" id="$delegate"><span class="type-signature"></span>$delegate<span class="signature">((target), (selector), (type), (handler))</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="drop"><span class="type-signature"></span>drop<span class="signature">((callback))</span><span class="type-signature"></span></h4>
     
 
     
@@ -112,7 +229,7 @@
 
 
 <div class="description">
-    Attach a handler to event for all elements that match the selector,now or in the future, based on a root element.
+    Will drop all storage and start fresh
 </div>
 
 
@@ -148,76 +265,7 @@
 
         <tr>
             
-                <td class="name"><code>(target)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The target.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>(selector)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The selector.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>(type)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The event type.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>(handler)</code></td>
+                <td class="name"><code>(callback)</code></td>
             
 
             <td class="type">
@@ -233,7 +281,7 @@
 
             
 
-            <td class="description last">The function to be applied.</td>
+            <td class="description last">The callback to fire after dropping the data</td>
         </tr>
 
     
@@ -274,7 +322,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line43">line 43</a>
+        <a href="store.js.html">store.js</a>, <a href="store.js.html#line149">line 149</a>
     </li></ul></dd>
     
 
@@ -310,7 +358,7 @@
     
 
     
-    <h4 class="name" id="$parent"><span class="type-signature"></span>$parent<span class="signature">((element), (tagName))</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="find"><span class="type-signature"></span>find<span class="signature">((query), (callback))</span><span class="type-signature"></span></h4>
     
 
     
@@ -318,7 +366,7 @@
 
 
 <div class="description">
-    Find the element's parent with the given tag name:$parent(qs('a'), 'div');
+    Finds items based on a query given as a JS object
 </div>
 
 
@@ -354,7 +402,7 @@
 
         <tr>
             
-                <td class="name"><code>(element)</code></td>
+                <td class="name"><code>(query)</code></td>
             
 
             <td class="type">
@@ -370,190 +418,7 @@
 
             
 
-            <td class="description last">The active element.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>(tagName)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The searched tagname.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line69">line 69</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="addEventListener"><span class="type-signature"></span>addEventListener<span class="signature">((target), (type), (callback), (useCapture))</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    addEventListener wrapper:
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>(target)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The target of the earphone.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>(type)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The type of event to listen to.</td>
+            <td class="description last">The query to match against (i.e. {foo: 'bar'})</td>
         </tr>
 
     
@@ -576,30 +441,7 @@
 
             
 
-            <td class="description last">The function to be applied.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>(useCapture)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A Boolean indicating whether events of this type will be distributed to the registeredlistener before being distributed to any EventTarget below in the DOM tree.</td>
+            <td class="description last">The callback to fire when the query hascompleted running</td>
         </tr>
 
     
@@ -640,7 +482,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line30">line 30</a>
+        <a href="store.js.html">store.js</a>, <a href="store.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -669,6 +511,11 @@
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>db.find({foo: 'bar', hello: 'world'}, function (data) {	 // data will return any items that have foo: bar and	 // hello: world in their properties});</code></pre>
+
+
 
         
             
@@ -676,7 +523,7 @@
     
 
     
-    <h4 class="name" id="qs"><span class="type-signature"></span>qs<span class="signature">((selector), (scope))</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id="findAll"><span class="type-signature"></span>findAll<span class="signature">((callback))</span><span class="type-signature"></span></h4>
     
 
     
@@ -684,7 +531,7 @@
 
 
 <div class="description">
-    Get element(s) by CSS selector:
+    Will retrieve all data from the collection
 </div>
 
 
@@ -720,13 +567,13 @@
 
         <tr>
             
-                <td class="name"><code>(selector)</code></td>
+                <td class="name"><code>(callback)</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">function</span>
 
 
             
@@ -736,30 +583,7 @@
 
             
 
-            <td class="description last">Selector argument.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>(scope)</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Context of use.</td>
+            <td class="description last">The callback to fire upon retrieving data.</td>
         </tr>
 
     
@@ -800,7 +624,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line5">line 5</a>
+        <a href="store.js.html">store.js</a>, <a href="store.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -825,28 +649,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    The first basic descending Element that corresponds to the specified selector group.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">*</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -858,7 +660,7 @@
     
 
     
-    <h4 class="name" id="qsa"><span class="type-signature"></span>qsa<span class="signature">((selector), (scope))</span><span class="type-signature"> &rarr; {NodeListOf.&lt;*>}</span></h4>
+    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">((id), (callback))</span><span class="type-signature"></span></h4>
     
 
     
@@ -866,7 +668,7 @@
 
 
 <div class="description">
-    Simplifies the querySelectorAll method.
+    Will remove an item from the Store based on its ID
 </div>
 
 
@@ -902,13 +704,13 @@
 
         <tr>
             
-                <td class="name"><code>(selector)</code></td>
+                <td class="name"><code>(id)</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -918,17 +720,22 @@
 
             
 
-            <td class="description last">Selector argument.</td>
+            <td class="description last">The ID of the item you want to remove</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>(scope)</code></td>
+                <td class="name"><code>(callback)</code></td>
             
 
             <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
             
             </td>
 
@@ -936,7 +743,7 @@
 
             
 
-            <td class="description last">Context of use.</td>
+            <td class="description last">The callback to fire after saving</td>
         </tr>
 
     
@@ -977,7 +784,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="helpers.js.html">helpers.js</a>, <a href="helpers.js.html#line17">line 17</a>
+        <a href="store.js.html">store.js</a>, <a href="store.js.html#line125">line 125</a>
     </li></ul></dd>
     
 
@@ -1002,28 +809,189 @@
 
 
 
-<h5>Returns:</h5>
+
+
+
+
 
         
-<div class="param-desc">
-    A static NodeList containing one Element object for each element that matches at leastone of the specified selectors or an empty NodeList if no match is found.
+            
+
+    
+
+    
+    <h4 class="name" id="save"><span class="type-signature"></span>save<span class="signature">((updateData), (callback), (id))</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Will save the given data to the DB. If no item exists it will create a newitem, otherwise it'll simply update an existing item's properties
 </div>
 
 
 
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
         
-<span class="param-type">NodeListOf.&lt;*></span>
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>(updateData)</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
 
 
-    </dd>
-</dl>
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The data to save back into the DB</td>
+        </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>(callback)</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The callback to fire after saving</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>(id)</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An optional param to enter an ID of an item to update</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="store.js.html">store.js</a>, <a href="store.js.html#line78">line 78</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
