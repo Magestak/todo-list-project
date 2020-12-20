@@ -5,6 +5,7 @@
 	/**
 	 * Sets up a brand new Todo list.
 	 * @module App
+	 * @constructor
 	 * @param {string} (name) The name of your new to do list.
 	 */
 	function Todo(name) {
