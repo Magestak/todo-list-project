@@ -1,6 +1,6 @@
 ## Etape 1: Corrigez les bugs  
 ### Les erreurs identifiées et corrigées dans les différents fichiers:
-* Bug 1 dans le fichier [controller.js](https://github.com/Magestak/todo-list-project/blob/master/js/controller.js), ligne 97:  
+* Bug 1 dans le fichier [controller.js](../js/controller.js), ligne 97:  
 Faute de frappe dans le nom d'une méthode: `adddItem` au lieu de `addItem`.  
 
 ```js
