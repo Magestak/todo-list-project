@@ -1,23 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <title>JSDoc: Class: Model</title>
-
-    <script src="scripts/prettify/prettify.js"> </script>
-    <script src="scripts/prettify/lang-css.js"> </script>
+    <title>Model - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
-<div id="main">
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
 
-    <h1 class="page-title">Class: Model</h1>
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Controller.html">Controller</a><ul class='methods'><li data-type='method'><a href="Controller.html#addItem">addItem</a></li><li data-type='method'><a href="Controller.html#editItem">editItem</a></li><li data-type='method'><a href="Controller.html#editItemCancel">editItemCancel</a></li><li data-type='method'><a href="Controller.html#editItemSave">editItemSave</a></li><li data-type='method'><a href="Controller.html#removeCompletedItems">removeCompletedItems</a></li><li data-type='method'><a href="Controller.html#removeItem">removeItem</a></li><li data-type='method'><a href="Controller.html#setView">setView</a></li><li data-type='method'><a href="Controller.html#showActive">showActive</a></li><li data-type='method'><a href="Controller.html#showAll">showAll</a></li><li data-type='method'><a href="Controller.html#showCompleted">showCompleted</a></li><li data-type='method'><a href="Controller.html#toggleAll">toggleAll</a></li><li data-type='method'><a href="Controller.html#toggleComplete">toggleComplete</a></li></ul></li><li><a href="Model.html">Model</a><ul class='methods'><li data-type='method'><a href="Model.html#create">create</a></li><li data-type='method'><a href="Model.html#getCount">getCount</a></li><li data-type='method'><a href="Model.html#read">read</a></li><li data-type='method'><a href="Model.html#remove">remove</a></li><li data-type='method'><a href="Model.html#removeAll">removeAll</a></li><li data-type='method'><a href="Model.html#update">update</a></li></ul></li><li><a href="Store.html">Store</a><ul class='methods'><li data-type='method'><a href="Store.html#drop">drop</a></li><li data-type='method'><a href="Store.html#find">find</a></li><li data-type='method'><a href="Store.html#findAll">findAll</a></li><li data-type='method'><a href="Store.html#remove">remove</a></li><li data-type='method'><a href="Store.html#save">save</a></li></ul></li><li><a href="Template.html">Template</a><ul class='methods'><li data-type='method'><a href="Template.html#clearCompletedButton">clearCompletedButton</a></li><li data-type='method'><a href="Template.html#itemCounter">itemCounter</a></li><li data-type='method'><a href="Template.html#show">show</a></li></ul></li><li><a href="View.html">View</a><ul class='methods'><li data-type='method'><a href="View.html#_bindItemEditCancel">_bindItemEditCancel</a></li><li data-type='method'><a href="View.html#_bindItemEditDone">_bindItemEditDone</a></li><li data-type='method'><a href="View.html#_clearCompletedButton">_clearCompletedButton</a></li><li data-type='method'><a href="View.html#_editItem">_editItem</a></li><li data-type='method'><a href="View.html#_editItemDone">_editItemDone</a></li><li data-type='method'><a href="View.html#_elementComplete">_elementComplete</a></li><li data-type='method'><a href="View.html#_itemId">_itemId</a></li><li data-type='method'><a href="View.html#_removeItem">_removeItem</a></li><li data-type='method'><a href="View.html#_setFilter">_setFilter</a></li><li data-type='method'><a href="View.html#bind">bind</a></li><li data-type='method'><a href="View.html#render">render</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#$delegate">$delegate</a></li><li><a href="global.html#$parent">$parent</a></li><li><a href="global.html#addEventListener">addEventListener</a></li><li><a href="global.html#qs">qs</a></li><li><a href="global.html#qsa">qsa</a></li><li><a href="global.html#setView">setView</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Model</h1>
+    
 
     
 
@@ -28,29 +44,77 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Model<span class="signature">((storage))</span><span class="type-signature"></span></h2>
+        <h2>
+        Model
+        </h2>
         
     
 </header>
 
 <article>
-    <div class="container-overview">
     
+        <div class="container-overview">
         
+            
 
     
 
-    
     <h4 class="name" id="Model"><span class="type-signature"></span>new Model<span class="signature">((storage))</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line10">line 10</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
     Creates a new Model instance and hooks up the storage.
 </div>
+
+
 
 
 
@@ -113,8 +177,21 @@
 
 
 
-<dl class="details">
 
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
     
 
     
@@ -122,68 +199,10 @@
     
 
     
-
+    
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line10">line 10</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
+     
 
     
 
@@ -197,17 +216,62 @@
 
     
 
-    
     <h4 class="name" id="create"><span class="type-signature"></span>create<span class="signature">((title), (callback))</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line20">line 20</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
     Creates a new todo model
 </div>
+
+
 
 
 
@@ -293,52 +357,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line20">line 20</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -357,17 +375,62 @@
 
     
 
-    
     <h4 class="name" id="getCount"><span class="type-signature"></span>getCount<span class="signature">((callback))</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line98">line 98</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
     Returns a count of all todos
 </div>
+
+
 
 
 
@@ -430,52 +493,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line98">line 98</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -494,15 +511,58 @@
 
     
 
-    
     <h4 class="name" id="read"><span class="type-signature"></span>read<span class="signature">((query), (callback))</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line47">line 47</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
     Finds and returns a model in storage. If no query is given it'll simplyreturn everything. If you pass in a string or number it'll look that up asthe ID of the model to find. Lastly, you can pass it an object to matchagainst.
 </div>
 
@@ -510,6 +570,13 @@
 
 
 
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>model.read(1, func); // Will find the model with an ID of 1model.read('1'); // Same as above//Below will find a model with foo equalling bar and hello equalling world.model.read({ foo: 'bar', hello: 'world' });</code></pre>
 
 
 
@@ -596,37 +663,62 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">((id), (callback))</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
 <dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line47">line 47</a>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line80">line 80</a>
     </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
     
 
     
@@ -640,42 +732,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>model.read(1, func); // Will find the model with an ID of 1model.read('1'); // Same as above//Below will find a model with foo equalling bar and hello equalling world.model.read({ foo: 'bar', hello: 'world' });</code></pre>
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="remove"><span class="type-signature"></span>remove<span class="signature">((id), (callback))</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
+<div class="description usertext">
     Removes a model from storage
 </div>
+
+
 
 
 
@@ -761,52 +822,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line80">line 80</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -825,17 +840,62 @@
 
     
 
-    
-    <h4 class="name" id="removeAll"><span class="type-signature"></span>removeAll<span class="signature">(callback)</span><span class="type-signature"></span></h4>
-    
+    <h4 class="name" id="removeAll"><span class="type-signature"></span>removeAll<span class="signature">((callback))</span><span class="type-signature"></span></h4>
 
     
 
 
 
-<div class="description">
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line89">line 89</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
     WARNING: Will remove ALL data from storage.
 </div>
+
+
 
 
 
@@ -870,7 +930,7 @@
 
         <tr>
             
-                <td class="name"><code>callback</code></td>
+                <td class="name"><code>(callback)</code></td>
             
 
             <td class="type">
@@ -898,52 +958,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line89">line 89</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -962,17 +976,62 @@
 
     
 
-    
     <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">((id), (data), (callback))</span><span class="type-signature"></span></h4>
-    
 
     
 
 
 
-<div class="description">
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="model.js.html">model.js</a>, <a href="model.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
     Updates a model by giving it an ID, data to update, and a callback to fire whenthe update is complete.
 </div>
+
+
 
 
 
@@ -1081,52 +1140,6 @@
 
 
 
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="model.js.html">model.js</a>, <a href="model.js.html#line70">line 70</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
 
 
 
@@ -1153,19 +1166,21 @@
 
 
 
+    
+    
 </div>
-
-<nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Controller.html">Controller</a></li><li><a href="Model.html">Model</a></li><li><a href="Store.html">Store</a></li><li><a href="Template.html">Template</a></li><li><a href="View.html">View</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$delegate">$delegate</a></li><li><a href="global.html#$parent">$parent</a></li><li><a href="global.html#addEventListener">addEventListener</a></li><li><a href="global.html#qs">qs</a></li><li><a href="global.html#qsa">qsa</a></li><li><a href="global.html#setView">setView</a></li></ul>
-</nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Dec 20 2020 01:34:01 GMT+0100 (GMT+01:00)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Mon Dec 21 2020 12:08:26 GMT+0100 (GMT+01:00) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script> prettyPrint(); </script>
-<script src="scripts/linenumber.js"> </script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
 </body>
 </html>
