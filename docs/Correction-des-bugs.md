@@ -19,7 +19,7 @@ Controller.prototype.addItem = function (title) {
 };
 ```
 
-* Bug 2 dans le fichier [store.js](https://github.com/Magestak/todo-list-project/blob/master/js/store.js), ligne 85:  
+* Bug 2 dans le fichier [store.js](../js/store.js), ligne 85:  
 Utilisation de la méthode `getTime()` pour éviter les conflits éventuels entre 2 IDs identiques.  
 
 ```js
@@ -33,7 +33,7 @@ for (let i = 0; i < 6; i++) {
 }
 ```
 
-* Bug 3 dans le fichier [index.html](https://github.com/Magestak/todo-list-project/blob/master/index.html), ligne 16:  
+* Bug 3 dans le fichier [index.html](../index.html), ligne 16:  
 Ajout de l'ID manquant `toggle-all` dans l'input.  
 
 ```html
@@ -46,7 +46,7 @@ Ajout de l'ID manquant `toggle-all` dans l'input.
 ```
 
 ### Les améliorations effectuées dans le code:  
-* Fichier [view.js](https://github.com/Magestak/todo-list-project/blob/master/js/view.js), ligne 263:  
+* Fichier [view.js](../js/view.js), ligne 263:  
 Remplacement des instructions `if / else if` par une instruction `Switch` plus adaptée pour une comparaison à une liste de valeurs attendues.  
 ```js
 View.prototype.bind = function (event, handler) {
@@ -65,7 +65,7 @@ View.prototype.bind = function (event, handler) {
   }
 };
 ```
-* Fichier [controller.js](https://github.com/Magestak/todo-list-project/blob/master/js/controller.js), ligne 126:  
+* Fichier [controller.js](../js/controller.js), ligne 126:  
 Remplacement des 2 boucles While par une expression régulière (RegExp).  
 ```js
 Controller.prototype.editItemSave = function (id, title) {
@@ -93,7 +93,7 @@ Controller.prototype.editItemSave = function (id, title) {
   }
 };
 ```
-* Fichier [controller.js](https://github.com/Magestak/todo-list-project/blob/master/js/controller.js), ligne 169:  
+* Fichier [controller.js](../js/controller.js), ligne 169:  
 Suppression d’une boucle forEach utilisée uniquement pour afficher des données en console:  
 ```js
 Controller.prototype.removeItem = function (id) {
@@ -120,7 +120,7 @@ Controller.prototype.removeItem = function (id) {
   self._filter();
 };
 ```
-* Fichier [store.js](https://github.com/Magestak/todo-list-project/blob/master/js/store.js), ligne 124:  
+* Fichier [store.js](../js/store.js), ligne 124:  
 Regroupement des 2 boucles for.  
 ```js
 Store.prototype.remove = function (id, callback) {
