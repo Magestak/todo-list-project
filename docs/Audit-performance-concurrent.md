@@ -2,7 +2,7 @@
 Avant d'envisager un éventuel "scaling" de notre application, nous avons réalisé un audit de performance d'un site concurrent ([TodoListMe.net](http://todolistme.net/)), 
 afin d'identifier les points forts et les points faibles de celui-ci, et établir ainsi les axes d'améliorations possibles de notre application.  
 
-![todoListMe.net](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/appli-todolistme.png)  
+![todoListMe.net](images-docs/appli-todolistme.png)  
 
 ## 1. Comparatif avec notre application:  
 L'application [TodoListMe.net](http://todolistme.net/) présente les fonctions de bases de notre application, mais elle possède également des fonctionnalités plus poussées concernant:  
@@ -25,7 +25,7 @@ L'application [TodoListMe.net](http://todolistme.net/) présente les fonctions d
 ## 2. Audit du site:  
 Parmi les outils disponibles pour réaliser cet audit, celui-ci a été réalisé à l’aide de la console et de l’inspecteur du navigateur Chrome (Version Version 87.0, 64 bits) et de Lighthouse sur un ordinateur Windows 10.  
 
-![Performance globle site](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/performance-globale-site.png)  
+![Performance globle site](images-docs/performance-globale-site.png)  
 
 Les résultats globaux de performance du site sont de:  
 * **33** sur 100 pour la performance.  
@@ -34,14 +34,14 @@ Les résultats globaux de performance du site sont de:
 * **58** sur 100 pour l'optimisation SEO.  
 
 ### 2.1 Performance:  
-![Critère performance](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/performance-metrics.png)  
+![Critère performance](images-docs/performance-metrics.png)  
 
 Le mauvais score de la performance de cette application est en majeure partie du:  
 * à un temps pour que la page soit entièrement intéractive de **11,1s**.
 * à un indice de vitesse de **4,8s**, qui correspond à la vitesse à laquelle le contenu de la page est visiblement rempli.  
 * à un first contentful paint de **2,4s**, qui correspond à l'affichage du premier élément sur la page.  
 
-![Opportunités gain performance](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/performance-opportunities.png)  
+![Opportunités gain performance](images-docs/performance-opportunities.png)  
 
 En analysant plus en détail ces critères de performance défaillants, nous constatons que:  
 * des gains de temps pourraient être faits (**2,05s**) en optimisant le javascript non utilisé, notamment jQuery (fichier non minifié entre autre).  
@@ -58,13 +58,13 @@ Plusieurs audits ont étés réussis sur ce critère, parmi lesquels:
 * Évite les grandes bibliothèques JavaScript avec des alternatives plus petites.
 * etc.
 ### 2.2 Accessibilité:  
-![Critère accessibilité](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/accessibility.png)  
+![Critère accessibilité](images-docs/accessibility.png)  
 
 De manière générale, lorsque nous disons qu'un site est accessible, nous voulons dire que le contenu du site est disponible et que ses fonctionnalités peuvent être exploitées par n'importe qui.  
 Dans notre cas, le site de notre concurrent à un score d'accessibilté de **70** sur 100.  
 
 
-![Accessibilité détails](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/accessibility-details.png)  
+![Accessibilité détails](images-docs/accessibility-details.png)  
 
 Si nous regardons plus en détails les résultats de l'audit sur ce critère, les points à travailler sont:  
 * Les couleurs d'arrière-plan et de premier plan n'ont pas un rapport de contraste suffisant.  
@@ -80,7 +80,7 @@ Plusieurs audits ont étés réussis sur ce critère, parmi lesquels:
 * Les attributs `[id]` des éléments actifs et focalisables sont uniques.  
 * etc.
 ### 2.3 Bonnes pratiques:  
-![Critère bonnes pratiques](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/bonnes-pratiques.png)  
+![Critère bonnes pratiques](images-docs/bonnes-pratiques.png)  
 
 Nous constatons sur l'analyse de ce critère dont le score est de **64** sur 100, les éléments suivants:  
 * Le site n'utilise pas **HTTPS**, ce qui constitue une faille de sécurité importante, même si le site n'utilise pas de données sensibles.  
@@ -94,7 +94,7 @@ Plusieurs audits ont étés réussis sur ce critère, parmi lesquels:
 * Le site évite les API obsolètes.  
 * etc.
 ### 2.4 SEO:  
-![Critère SEO](https://github.com/Magestak/todo-list-project/blob/master/docs/images-docs/seo.png)  
+![Critère SEO](images-docs/seo.png)  
 
 Nous constatons sur l'analyse de ce critère dont le score est de **58** sur 100, les éléments suivants:  
 * Le site n'est pas adapté à l'utilisation sur appareil mobile.  
