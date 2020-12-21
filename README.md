@@ -6,7 +6,7 @@ Les objectifs du projet:
 * Optimiser les performances d'un projet à l'aide des DevTools. 
 * Reprendre en main un projet JavaScript existant.
 ## Etape 1 : Corrigez les bugs
-Voir le fichier [Correction des bugs](https://github.com/Magestak/todo-list-project/blob/master/docs/Correction-des-bugs.md) pour le détail.  
+Voir le fichier [Correction des bugs](docs/Correction-des-bugs.md) pour le détail.  
 ## Etape 2 : où sont les tests ?!  
 ### Les tests suivants du fichier [ControllerSpec.js](https://github.com/Magestak/todo-list-project/blob/master/test/ControllerSpec.js) dans le dossier [test](https://github.com/Magestak/todo-list-project/tree/master/test) ont étés complétés:  
 ```
