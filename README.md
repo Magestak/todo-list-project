@@ -8,7 +8,7 @@ Les objectifs du projet:
 ## Etape 1 : Corrigez les bugs
 Voir le fichier [Correction des bugs](docs/Correction-des-bugs.md) pour le détail.  
 ## Etape 2 : où sont les tests ?!  
-### Les tests suivants du fichier [ControllerSpec.js](https://github.com/Magestak/todo-list-project/blob/master/test/ControllerSpec.js) dans le dossier [test](https://github.com/Magestak/todo-list-project/tree/master/test) ont étés complétés:  
+### Les tests suivants du fichier [ControllerSpec.js](test/ControllerSpec.js) dans le dossier [test](test) ont étés complétés:  
 ```
 ligne  61: 'should show entries on start-up'
 ligne 100: 'should show active entries' 
@@ -22,8 +22,8 @@ ligne 297: 'should remove an entry from the model'
 ```
 ## Etape 3 : optimisez la performance  
 Analyse de la performance d'une application concurrente.  
-Voir l'[audit concurrent](https://github.com/Magestak/todo-list-project/blob/master/docs/Audit-performance-concurrent.md).  
+Voir l'[audit concurrent](docs/Audit-performance-concurrent.md).  
 ## Etape 4 : améliorez le projet  
 Pour cette étape consacré à la documentation du projet:  
-* Voir la [documentation fonctionnelle](https://github.com/Magestak/todo-list-project/blob/master/docs/Documentation-fonctionnelle.md) de l'application.  
+* Voir la [documentation fonctionnelle](docs/Documentation-fonctionnelle.md) de l'application.  
 * 
