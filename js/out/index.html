@@ -60,8 +60,82 @@
     <section>
         <h1>Documentation technique - Application "todos"</h1>
         <p>Ce document (à destination des développeurs), à pour vocation de servir de support technique.<br>
-        Il décrit et détaille le fonctionnement des différentes classes, méthodes et fonctions globales qui servent au fonctionnement de l'application.</p>
-        <p>Liens utiles: </p>
+        Il décrit et détaille l'architecture de l'application, ainsi que les différentes classes, méthodes et fonctions globales qui servent à son fonctionnement.</p>
+        <div>
+            <h2>Architecture de l'application</h2>
+            <div>
+                <h4>Organisation dossiers et fichiers de l'application "todos"</h4>
+                <figure>
+                    <img src="img/architecture-application-todos.svg" height="450" width="600" alt="Architecture application todos">
+                </figure>
+                <p>Ce schéma matérialise la structure de l'application "todos" qui comprend (entre autres) les dossiers et fichiers principaux suivants:</p>
+                <ul>
+                    <li>index.html: ce fichier matérialise l'application dans le navigateur.</li>
+                    <li>package.json: ce fichier liste les dépendances à installer avec npm nécessaires à l'application (jasmine, jsdoc).</li>
+                    <li>js: ce dossier comprend les fichiers javascript de l'application.
+                        <ul>
+                            <li>
+                                app.js: Ce fichier est le point d’entrée de l’application. Il permet d’initialiser la base de données
+                                (store), le modèle (model), le template (template), la vue (view) et le contrôleur (controller).
+                            </li>
+                            <li>
+                                store.js: Ce fichier permet la création de la base de données de l’application. Les données saisis par l'utilisateur seront stockées dans le
+                                "localStorage" du navigateur. Les méthodes de ce fichier ne sont appelées que dans le fichier model.js.
+                            </li>
+                            <li>
+                                model.js: Ce fichier sert à gérer les données. Il s’occupe de récupérer et de gérer les informations dans la base de données. Il
+                                créé un nouveau modèle de base de données en se connectant au LocalStorage du navigateur (via store). Il
+                                utilisera les méthodes du fichier Store.js pour effectuer les opérations sur la base de données, qui seront
+                                appelées via le contrôleur.
+                            </li>
+                            <li>
+                                view.js: Ce fichier gère l’affichage et la manipulation du DOM. Les changements d’états du template HTML s’effectuent ici.
+                                Ce fichier permet de mettre à jour le visuel de l’application. La fonction view permet deux types d’actions : attacher
+                                un évènement d'une tâche donnée avec un gestionnaire d'évènement (bind) et faire le rendu d'une commande avec
+                                ses options (render).
+                            </li>
+                            <li>
+                                controller.js: Ce fichier permet de faire le lien entre la base de données (Model) et l’interface du site (view) selon les actions de
+                                l’utilisateur
+                            </li>
+                            <li>
+                                helpers.js: Ce fichier permet de simplifier la syntaxe de JavaScript, Il crée des fonctions réutilisables et fournit ainsi des raccourcis
+                                utilisés dans les principaux fichiers.
+                            </li>
+                            <li>
+                                template.js: Ce fichier permet de fournir une trame HTML pour chaque nouvelle entrée ajoutée. Le template est gérée et
+                                actualisée par le fichier view.js.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>nodes_modules: ce dossier comprend les packages node (dépendances) nécessaires au fonctionnement de l'application.</li>
+                    <li>test: ce dossier reprend les tests réalisés pour la construction de l'application.</li>
+                </ul>
+            </div>
+            <div>
+                <h4>Architecture MVC</h4>
+                <p>
+                    L’architecture de l’application est basée sur une architecture <strong>MVC</strong> (Modèle-vue-contrôleur).
+                </p>
+                <p><strong>MVC</strong> est composé de trois composants</p>
+                <ul>
+                    <li>
+                        <strong>Le Modèle</strong> est l'endroit où les objets de données de l'application sont stockés. Le modèle ne sait rien des vues et des contrôleurs.
+                        Lorsqu'un modèle change, il informe généralement ses observateurs qu'un changement s'est produit.
+                    </li>
+                    <li>
+                        <strong>La Vue</strong> est ce qui est présenté aux utilisateurs et comment les utilisateurs interagissent avec l'application.
+                    </li>
+                    <li>
+                        <strong>Le Controleur</strong> est le décideur et le lien entre le modèle et la vue. Le contrôleur met à jour la vue lorsque le modèle change.
+                        Il ajoute également des écouteurs d'événements à la vue et met à jour le modèle lorsque l'utilisateur manipule la vue.
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <h2>Liens utiles: </h2>
         <ul>
             <li><a href="#">Application "todos".</a></li>
             <li><a href="#">Repository GitHub du projet.</a></li>
