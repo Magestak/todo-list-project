@@ -26,4 +26,4 @@ Voir l'[audit concurrent](docs/Audit-performance-concurrent.md).
 ## Etape 4 : améliorez le projet  
 Pour cette étape consacré à la documentation du projet:  
 * Voir la [documentation fonctionnelle](docs/Documentation-fonctionnelle.md) de l'application.  
-* 
+* Voir la [documentation technique](#) de l'application.
