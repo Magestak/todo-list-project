@@ -4,8 +4,7 @@
 Faute de frappe dans le nom d'une méthode: `adddItem` au lieu de `addItem`.  
 
 ```js
-// Bug 1: "adddItem" au lieu de "addItem"
-Controller.prototype.addItem = function (title) {
+Controller.prototype.addItem = function (title) { // Step 1: corrected bug 1 = typing error
   let self = this;
     
   if (title.trim() === '') {
@@ -23,8 +22,9 @@ Controller.prototype.addItem = function (title) {
 Utilisation de la méthode `getTime()` pour éviter les conflits éventuels entre 2 IDs identiques.  
 
 ```js
+// Fixed bug 2 = possible conflict between two identical IDs
 // Generate ID
-let newId = (new Date().getTime()); // Utilisation de la méthode getTime() pour générer un ID unique
+let newId = (new Date().getTime());
 console.log(newId);
 let charset = "0123456789";
 
@@ -38,7 +38,7 @@ Ajout de l'ID manquant `toggle-all` dans l'input.
 
 ```html
 <section class="main">
-  <!-- Ajout de l'ID manquant sur l'input -->
+  <!-- Adding the missing ID on the input -->
   <input id="toggle-all" class="toggle-all" type="checkbox">
   <label for="toggle-all">Mark all as complete</label>
   <ul class="todo-list"></ul>
