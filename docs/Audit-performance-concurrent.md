@@ -9,7 +9,7 @@ L'application [TodoListMe.net](http://todolistme.net/) présente les fonctions d
 * La gestion des listes:  
     * Possibilité de créer plusieurs listes de tâches.
     * Possibilité de créer des catégories pour stocker les listes.
-* Le tri possibles et l'ajout de temporalité sur les tâches:  
+* Le tri possible et l'ajout de temporalité sur les tâches:  
     * Possibilité d'assigner une date à une tâche.  
     * Possibilité de classer les tâches selon différents critères (alphabétiques, date, etc.).  
     * Système de drag and drop pour déplacer, planifier ou compléter une tâche.  
@@ -47,7 +47,7 @@ En analysant plus en détail ces critères de performance défaillants, nous con
 * des gains de temps pourraient être faits (**2,05s**) en optimisant le javascript non utilisé, notamment jQuery (fichier non minifié entre autre).  
 * le chargement de la page est également ralenti par du code tiers (publicité, réseaux sociaux, etc.) qui bloque le thread principal lors du chargement. Il serait nécessaire de
 limiter le nombre de fournisseurs tiers redondants, et d'essayer de charger ce code tiers une fois le chargement de la page terminé pour améliorer la performance.  
-* d'une manière plus générale, des améliorations doivent être faite sur le **travail du thread principal**, notamment sur le report ou la suppression de trvail inutile.  
+* d'une manière plus générale, des améliorations doivent être faites sur le **travail du thread principal**, notamment sur le report ou la suppression de travail inutile.  
 #### Audits de performance réussis (19):  
 Plusieurs audits ont étés réussis sur ce critère, parmi lesquels:  
 * Des images utilisés de bonnes tailles.
